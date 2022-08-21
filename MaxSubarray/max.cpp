@@ -41,7 +41,7 @@ public:
 
 int main()
 {
-    vector<int> nums{5, 4, -1, 7, 8};
+    vector<int> nums{5, -3, 5};
 
     cout << Solution::fastMax(nums);
     return 0;
