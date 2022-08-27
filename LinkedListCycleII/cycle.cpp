@@ -34,6 +34,26 @@ public:
         }
         return NULL;
     }
+
+    static ListNode *position(ListNode *head) {
+        ListNode* slowptr = head;
+        ListNode* fastptr = head;
+
+        while(fastptr && fastptr->next) {
+            slowptr = slowptr->next;
+            fastptr = fastptr->next->next;
+            if(slowptr == fastptr)
+                break;
+        }
+
+        if(fastptr == nullptr || fastptr->next == nullptr) return NULL;
+
+        while(head != slowptr) {
+            head = head->next;
+            slowptr = slowptr->next;
+        }
+        return head;
+    }
 };
 
 int main()
@@ -46,11 +66,11 @@ int main()
     one->next = two;
     two->next = three;
     three->next = four;
-    // four->next = three;
+    four->next = one;
 
     ListNode *head = one;
 
-    ListNode *result = Solution::cyclePosition(head);
+    ListNode *result = Solution::position(head);
 
     cout << result->val << endl;
     return 0;
